@@ -1,0 +1,60 @@
+{
+  "navbar": {
+    "home": "Αρχική",
+    "about": "Σχετικά",
+    "contact": "Επικοινωνία"
+  },
+  "footer": {
+    "quickLinks": "Γρήγοροι Σύνδεσμοι",
+    "connect": "Σύνδεση",
+    "about": "Σχετικά",
+    "contact": "Επικοινωνία",
+    "rights": "Mε επιφύλαξη παντός δικαιώματος."
+  },
+  "HomePage": {
+    "ProfileSection": {
+      "name": "Χρήστος Απατσίδης",
+      "description": "Full-Stack Developer",
+      "location": "📍Θεσσαλονίκη",
+      "currentPosition": "👨🏻‍💻Electronic Warfare Operator"
+    },
+    "SkillsSection": {
+      "title": "Δεξιότητες",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Βάσεις Δεδομένων",
+      "mobileApps": "Mobile Εφαρμογές",
+      "scrollMessage": "Δεξιότητες"
+    }
+  },
+  "ContactPage": {
+    "title": "Επικοινωνία",
+    "description": "Επικοινωνήστε μαζί μου στέλνοντας μήνυμα μέσω της παρακάτω φόρμας.",
+    "form": {
+      "name": "Όνομα",
+      "email": "Email",
+      "message": "Μήνυμα",
+      "send": "Αποστολή Μηνύματος",
+      "sending": "Αποστολή...",
+      "validations": {
+        "nameRequired": "Το όνομα είναι υποχρεωτικό.",
+        "emailRequired": "Το email είναι υποχρεωτικό.",
+        "emailInvalid": "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email.",
+        "messageRequired": "Το μήνυμα είναι υποχρεωτικό.",
+        "invalidEmail": "Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email.",
+        "turnstileRequired": "Παρακαλώ ολοκληρώστε τον έλεγχο ασφαλείας."
+      },
+      "errors": {
+        "verificationFailed": "Η επαλήθευση απέτυχε. Παρακαλώ δοκιμάστε ξανά.",
+        "verificationExpired": "Η επαλήθευση έχει λήξει. Παρακαλώ δοκιμάστε ξανά.",
+        "networkError": "Σφάλμα δικτύου. Παρακαλώ ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.",
+        "serverError": "Παρουσιάστηκε σφάλμα. Παρακαλώ δοκιμάστε ξανά."
+      }
+    },
+    "submittedMessage": {
+      "title": "Ευχαριστούμε!",
+      "subtitle": "Το μήνυμά σας στάλθηκε με επιτυχία.",
+      "description": "Θα απαντήσω το συντομότερο δυνατό!"
+    }
+  }
+}

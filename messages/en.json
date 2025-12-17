@@ -1,0 +1,60 @@
+{
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "connect": "Connect",
+    "about": "About",
+    "contact": "Contact",
+    "rights": "All rights reserved."
+  },
+  "HomePage": {
+    "ProfileSection": {
+      "name": "Christos Apatsidis",
+      "description": "Full-Stack Developer",
+      "location": "📍Thessaloniki, Greece",
+      "currentPosition": "👨🏻‍💻Electronic Warfare Operator"
+    },
+    "SkillsSection": {
+      "title": "Skills",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Databases",
+      "mobileApps": "Mobile Apps",
+      "scrollMessage": "Scroll to see more skills"
+    }
+  },
+  "ContactPage": {
+    "title": "Contact",
+    "description": "Get in touch with me using the form below.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "validations": {
+        "nameRequired": "Name is required.",
+        "emailRequired": "Email is required.",
+        "emailInvalid": "Please enter a valid email address.",
+        "messageRequired": "Message is required.",
+        "invalidEmail": "Please enter a valid email address.",
+        "turnstileRequired": "Please complete the security check."
+      },
+      "errors": {
+        "verificationFailed": "Verification failed. Please try again.",
+        "verificationExpired": "The verification has expired. Please try again.",
+        "networkError": "Network error. Please check your connection and try again.",
+        "serverError": "An error occurred. Please try again."
+      }
+    },
+    "submittedMessage": {
+      "title": "Thank You!",
+      "subtitle": "Your message has been sent successfully.",
+      "description": "I will respond as soon as possible!"
+    }
+  }
+}
