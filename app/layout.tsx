@@ -1,9 +1,16 @@
 import type { Metadata } from "next";
 import React from "react";
+// Theme Provider
 import { ThemeProvider } from "@/components/theme-provider"
+// Fonts
 import { Geist, Geist_Mono } from "next/font/google";
+// Spotlight background effect
 import { Spotlight } from "@/components/ui/spotlight-new";
+// i18n
 import { NextIntlClientProvider } from 'next-intl';
+// Vercel Speed Insights
+import { SpeedInsights } from "@vercel/speed-insights/next"
+// Styles
 import "./globals.css";
 
 import { Navbar } from "@/components/navbar";
@@ -64,6 +71,7 @@ export default function RootLayout({
             </footer>
           </ThemeProvider>
         </NextIntlClientProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
