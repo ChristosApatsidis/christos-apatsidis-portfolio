@@ -1,6 +1,8 @@
 "use server";
 
-/* i18n */
+// Database
+import mongoDB from '@/lib/mongodb';
+// i18n
 import { getTranslations } from 'next-intl/server';
 
 export type FormField = {
@@ -13,7 +15,11 @@ export type FormField = {
 };
 
 type ValidationErrors = { [key: string]: string };
-type ResponseError = { type: string; message: string }[];
+type ResponseError = string;
+
+// MongoDB database and collection
+const db = mongoDB.db("portfolio_database");
+const collection = db.collection("contact_submissions");
 
 /**
  * shared validation function
@@ -40,6 +46,18 @@ export async function validateContactForm(formData: FormField[]) {
         validationErrors[field.name] = t('invalidEmail');
       }
     }
+
+    // Max length validation
+    const maxLengths: { [key: string]: number } = {
+      name: 100,
+      email: 100,
+      message: 1000,
+    };
+
+    if (maxLengths[field.name] && field.value.length > maxLengths[field.name]) {
+      hasvalidationErrors = true;
+      validationErrors[field.name] = t(`${field.name}MaxLength`, { max: maxLengths[field.name] });
+    }
   });
 
   return { hasvalidationErrors, validationErrors };
@@ -51,6 +69,12 @@ export async function validateContactForm(formData: FormField[]) {
  */
 export async function submitContactForm(formData: FormField[], turnstileToken: string) {
   const t = await getTranslations('ContactPage.form.errors');
+
+  // Only allow expected fields
+  const allowedFields = ["name", "email", "message"];
+
+  // Filter out any unexpected fields
+  formData = formData.filter(field => allowedFields.includes(field.name));
 
   // Server-side validation (security layer)
   const { hasvalidationErrors, validationErrors } = await validateContactForm(formData);
@@ -77,9 +101,27 @@ export async function submitContactForm(formData: FormField[], turnstileToken: s
     };
   }
 
-  // Your actual submission logic here
-  console.log('Form submitted on server:', formData);
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  // Simulate processing delay (for UX purposes)
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  // Prepare data for insertion
+  let formDataObj: { [key: string]: string } = {};
+
+  formData.forEach((field) => {
+    formDataObj[field.name] = field.value;
+  });
+
+  // Save submission to MongoDB
+  await collection.insertOne({ ...formDataObj, createdAt: new Date() }).catch((error) => {
+    console.error("Error saving contact form submission:", error);
+    return {
+      success: false,
+      hasvalidationErrors,
+      validationErrors,
+      hasResponseError: true,
+      responseError: t('serverError')
+    };
+  });
 
   return {
     success: true,
