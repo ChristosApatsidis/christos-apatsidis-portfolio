@@ -22,12 +22,12 @@ export default function AboutPage() {
         <SectionCardHeader>About me</SectionCardHeader>
         <p className="text-md text-black dark:text-white mb-2">
           Technology has always been my battlefield.
-          From the earliest days of my career, I was drawn to the challenge of turning complex problems into elegant digital solutions.
-          Over the past decade, I've mastered the art of full stack development—building systems that balance logic, architecture, and creativity.
+          From the earliest days of my career, I have been drawn to the challenge of turning complex problems into elegant digital solutions.
+          Over the past decade, I've mastered the art of full stack development—building systems that balance logic, architecture and creativity.
         </p>
         <p className="text-md text-black dark:text-white">
-          Currently, I apply my expertise to a unique frontier.
-          The Greek Army's Electronic Warfare division.
+          Currently, I have been applying my expertise to a unique frontier:
+          the Greek Army's Electronic Warfare division.
           There, I work directly with advanced EW systems, analyzing signals and maintaining mission-critical technology.
           I thrive on transforming intricate problems into tactical, practical solutions.
         </p>
