@@ -1,16 +1,30 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+// Next.js components
 import Link from "next/link";
+import Image from "next/image";
+// Next.js navigation
+import { usePathname } from "next/navigation";
+// Animation and theme
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { LanguageToggle } from "@/components/language-toggle";
-import { useRouter, usePathname } from "next/navigation";
-import { FaBars, FaTimes } from "react-icons/fa";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+// i18n and Language Toggle
 import { useTranslations } from 'next-intl';
+import { LanguageToggle } from "@/components/language-toggle";
+// Icons
+import { FaBars, FaTimes } from "react-icons/fa";
+// Utils
+import { cn } from "@/lib/utils";
 
+/**
+ * Navbar Component
+ * Renders a responsive navigation bar with logo, menu items, theme toggle, and language toggle.
+ * Futures:
+ * - Responsive design with mobile menu
+ * - Animated transitions for scroll and menu interactions
+ * - i18n support for menu item titles
+ */
 export function Navbar({ className }: { className?: string }) {
   const t = useTranslations('navbar');
 
@@ -239,58 +253,74 @@ function MenuItem({ href, children, closeMobileMenu, mobile, pendingMobileNav, s
   pendingMobileNav?: string | null;
   setPendingMobileNav?: (href: string | null) => void;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
   const isActive = pathname === href;
   const underlineDuration = 0.3;
 
-  const handleNavigation = (href: string) => {
-    if (!mobile) return router.push(href);
+  /**
+   * Handles navigation for mobile menu items with animated transitions.
+   * This function manages the mobile navigation flow by:
+   * 1. Checking if the device is in mobile mode (returns early if not)
+   * 2. Triggering an underline animation by setting the pending navigation state
+   * 3. Waiting for the underline animation to complete
+   * 4. Closing the mobile menu and clearing the pending navigation state
+   * 
+   * The timeout duration is synchronized with the underline animation duration
+   * to ensure smooth visual transitions before menu closure.
+   */
+  const handleMobileNavigation = (href: string) => {
+    if (!mobile) return;
 
     // Start underline animation
     setPendingMobileNav?.(href);
 
-    // Navigate to the route
-    router.push(href);
-
-    // Wait for underline animation, then close menu
+    /**
+     * Wait for underline animation, then close menu
+     * The timeout duration is synchronized with the underline animation duration
+     * to ensure smooth visual transitions before menu closure.
+     */
     setTimeout(() => {
       closeMobileMenu?.();
       setPendingMobileNav?.(null);
-    }, underlineDuration * 1000); // match this to your underline animation duration
+    }, underlineDuration * 1000);
   };
 
   // Show underline if active or pending navigation
   const showUnderline = isActive || pendingMobileNav === href;
 
   return (
-    <div
-      className={cn("relative", mobile && "p-2")}
-      onClick={() => handleNavigation(href)}
+    <Link
+      href={href}
+      onClick={() => handleMobileNavigation(href)}
+      prefetch={true}
     >
-      <div className="relative inline-block">
-        <div
-          className={cn(
-            `cursor-pointer font-bold transition-colors`,
-            isActive
-              ? "text-black dark:text-white"
-              : "text-black/60 hover:text-black/90 dark:text-white/60 dark:hover:text-white/90"
-          )}
-        >
-          {children}
+      <div
+        className={cn("relative", mobile && "p-2")}
+      >
+        <div className="relative inline-block">
+          <div
+            className={cn(
+              `cursor-pointer font-bold transition-colors`,
+              isActive
+                ? "text-black dark:text-white"
+                : "text-black/60 hover:text-black/90 dark:text-white/60 dark:hover:text-white/90"
+            )}
+          >
+            {children}
+          </div>
+          <AnimatePresence>
+            {showUnderline && (
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                exit={{ scaleX: 0, opacity: 0 }}
+                transition={{ duration: underlineDuration, ease: "easeInOut" }}
+                className="absolute left-0 right-0 h-[2px] bg-black dark:bg-white bottom-0 origin-left"
+              />
+            )}
+          </AnimatePresence>
         </div>
-        <AnimatePresence>
-          {showUnderline && (
-            <motion.div
-              initial={{ scaleX: 0, opacity: 0 }}
-              animate={{ scaleX: 1, opacity: 1 }}
-              exit={{ scaleX: 0, opacity: 0 }}
-              transition={{ duration: underlineDuration, ease: "easeInOut" }}
-              className="absolute left-0 right-0 h-[2px] bg-black dark:bg-white bottom-0 origin-left"
-            />
-          )}
-        </AnimatePresence>
       </div>
-    </div>
+    </Link>
   );
 };
