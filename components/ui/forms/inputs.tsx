@@ -2,7 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from "@/lib/utils";
 
-interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   label?: string;
@@ -10,7 +10,7 @@ interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-interface FormTextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   label?: string;
@@ -23,7 +23,7 @@ interface FormTextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaEle
  * Reusable form input component with validation error display and smooth animations.
  * Supports all standard HTML input attributes through prop spreading.
  */
-export const FormTextInput: React.FC<FormInputProps> = ({ value, onChange, label, error, className, ...inputProps }) => {
+export const Input: React.FC<InputProps> = ({ value, onChange, label, error, className, ...inputProps }) => {
   return (
     <div className="flex flex-col mb-4">
       {label && <label className="mb-2 font-medium">{label}</label>}
@@ -46,7 +46,7 @@ export const FormTextInput: React.FC<FormInputProps> = ({ value, onChange, label
  * Reusable form textarea component with validation error display and smooth animations.
  * Supports all standard HTML textarea attributes through prop spreading.
  */
-export const FormTextArea: React.FC<FormTextAreaProps> = ({ value, onChange, label, className, error, resize, ...textareaProps }) => {
+export const TextArea: React.FC<TextAreaProps> = ({ value, onChange, label, className, error, resize, ...textareaProps }) => {
   return (
     <div className="flex flex-col mb-4">
       {label && <label className="mb-2 font-medium">{label}</label>}
@@ -91,5 +91,5 @@ function InputError({ message }: {
   );
 }
 
-FormTextInput.displayName = 'FormTextInput';
-FormTextArea.displayName = 'FormTextArea';
+Input.displayName = 'Input';
+TextArea.displayName = 'TextArea';

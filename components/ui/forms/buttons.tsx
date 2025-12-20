@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface FormButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   type?: "button" | "submit" | "reset";
   loading?: boolean;
   loadingMessage?: string;
@@ -11,7 +11,7 @@ interface FormButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> 
   children: React.ReactNode;
 }
 
-export const FormButton: React.FC<FormButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   type = "button",
   loading = false,
   loadingMessage = "Loading...",
@@ -43,3 +43,5 @@ export const FormButton: React.FC<FormButtonProps> = ({
     </motion.button>
   );
 };
+
+Button.displayName = "Button";

@@ -3,10 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 /* UI Components */
 import { SectionCard, SectionCardHeader } from '@/components/ui/sectionCard';
-import { FormTextInput, FormTextArea } from '@/components/ui/forms/inputs';
-import { FormButton } from '@/components/ui/forms/buttons';
+import { Input, TextArea, Button, Turnstile } from '@/components/ui/forms';
 import { TurnstileInstance } from '@marsidev/react-turnstile';
-import { Turnstile } from '@/components/ui/forms/turnstile';
 /* Actions */
 import { validateContactForm, submitContactForm, type FormField } from '@/app/contact/actions';
 /* Animation */
@@ -165,7 +163,7 @@ export default function ContactPage() {
                 {/* Form Fields */}
                 {formData.map((field, idx) => {
                   return field.type === 'textarea' ? (
-                    <FormTextArea
+                    <TextArea
                       key={`${field.name}-${idx}`}
                       name={field.name}
                       placeholder={field.placeholder}
@@ -177,7 +175,7 @@ export default function ContactPage() {
                       error={field.error}
                     />
                   ) : (
-                    <FormTextInput
+                    <Input
                       key={`${field.name}-${idx}`}
                       type={field.type}
                       name={field.name}
@@ -208,14 +206,14 @@ export default function ContactPage() {
                   }}
                 />
 
-                <FormButton
+                <Button
                   type="submit"
                   loading={submitLoading}
                   loadingMessage={t('form.sending')}
                   disabled={submitLoading || !turnstileToken}
                 >
                   {t('form.send')}
-                </FormButton>
+                </Button>
               </motion.form>
             </div>
           )}
