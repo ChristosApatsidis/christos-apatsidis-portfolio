@@ -30,8 +30,39 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Christos Apatsidis Portfolio",
   description: "Christos Apatsidis portfolio",
+  keywords: [
+    "Christos Apatsidis",
+    "Portfolio",
+    "Developer",
+    "Software Engineer",
+    "Web Developer",
+    "Full-Stack Developer",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "Node.js",
+    "CSS",
+    "HTML",
+    "Programming",
+    "Tech Blog",
+  ],
+  authors: [{ name: "Christos Apatsidis", url: "https://apatsidis.com" }],
+  creator: "Christos Apatsidis",
   icons: {
     icon: "/favicon.ico",
+  },
+  openGraph: {
+    title: "Christos Apatsidis Portfolio",
+    description: "Christos Apatsidis portfolio",
+    siteName: "Christos Apatsidis Portfolio",
+    images: ["./logo.png"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Christos Apatsidis Portfolio",
+    description: "Christos Apatsidis portfolio",
+    images: ["./logo.png"]
   }
 };
 
@@ -72,6 +103,7 @@ export default function RootLayout({
             </footer>
           </ThemeProvider>
         </NextIntlClientProvider>
+        {/* Vercel Speed Insights & Analytics */}
         <SpeedInsights />
         <Analytics />
       </body>
