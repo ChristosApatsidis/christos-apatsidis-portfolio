@@ -11,6 +11,8 @@ import { NextIntlClientProvider } from 'next-intl';
 // Vercel Speed Insights and Analytics
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
+// Cookie Banner
+import { CookieBanner } from "@/components/cookie-banner";
 // Styles
 import "./globals.css";
 
@@ -101,6 +103,8 @@ export default function RootLayout({
             <footer>
               <Footer className="container mx-auto max-w-6xl px-4" />
             </footer>
+            {/* Cookie Banner */}
+            <CookieBanner />
           </ThemeProvider>
         </NextIntlClientProvider>
         {/* Vercel Speed Insights & Analytics */}
