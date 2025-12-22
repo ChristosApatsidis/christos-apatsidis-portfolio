@@ -1,12 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 
 /**
  * Cookie Banner Component
  * Displays a cookie consent banner at the bottom of the screen.
  */
 export function CookieBanner() {
+  const { resolvedTheme } = useTheme();
+
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,33 +28,10 @@ export function CookieBanner() {
   return (
     <div className="fixed bottom-3 left-0 right-0 z-50 pointer-events-none">
       <div className="pointer-events-auto w-full flex justify-start md:justify-normal">
-        <div className="
-          bg-gradient-to-br 
-          from-neutral-900 
-          via-neutral-800 
-          to-neutral-700 
-          dark:from-neutral-100 
-          dark:via-neutral-200 
-          dark:to-neutral-300 
-          text-white 
-          dark:text-neutral-900 
-          rounded-xl 
-          shadow-xl 
-          p-3 
-          flex 
-          items-center 
-          gap-3  
-          border 
-          border-neutral-700 
-          dark:border-neutral-300 
-          min-w-[220px] 
-          w-full 
-          md:max-w-sm 
-          md:w-auto 
-          mx-4 
-          md:ml-3 
-          transition-colors 
-          duration-300">
+        <div
+          className="relative bg-white dark:bg-black text-neutral-900 dark:text-white rounded-xl shadow-xl p-3 flex items-center gap-3 border border-neutral-200 dark:border-neutral-700 min-w-[220px] w-full md:max-w-sm md:w-auto mx-4 md:ml-3 transition-colors duration-300 overflow-hidden"
+          style={{ backgroundColor: resolvedTheme === 'dark' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(10px)' }}
+        >
           <span className="text-xs font-medium">
             This website uses cookies to enhance your browsing experience, analyze site traffic, and personalize content. <br />
             By continuing to use this site, you consent to our use of cookies.
@@ -77,6 +57,6 @@ export function CookieBanner() {
           </button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
