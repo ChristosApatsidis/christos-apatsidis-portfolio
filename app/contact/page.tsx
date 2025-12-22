@@ -6,7 +6,7 @@ import { SectionCard, SectionCardHeader } from '@/components/ui/sectionCard';
 import { Input, TextArea, Button, Turnstile } from '@/components/ui/forms';
 import { TurnstileInstance } from '@marsidev/react-turnstile';
 /* Actions */
-import { validateContactForm, submitContactForm, type FormField } from '@/app/contact/actions';
+import { submitContactForm, type FormField } from '@/app/contact/actions';
 /* Animation */
 import { motion, AnimatePresence } from 'framer-motion';
 /* i18n */
@@ -23,6 +23,7 @@ export default function ContactPage() {
   // Form Turnstile
   const [turnstileToken, setTurnstileToken] = useState<string>('');
   const turnstileRef = useRef<TurnstileInstance>(null);
+  // Form submission state
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [submittedSuccessfully, setSubmittedSuccessfully] = useState<boolean>(false);
   const [serverError, setServerError] = useState<string>('');
@@ -51,20 +52,6 @@ export default function ContactPage() {
     // Validate Turnstile
     if (!turnstileToken) {
       setServerError(t('form.validations.turnstileRequired'));
-      return;
-    }
-
-    // Client-side validation (UX layer)
-    const { hasvalidationErrors, validationErrors } = await validateContactForm(formData);
-
-    // Catch validation errors
-    if (hasvalidationErrors) {
-      setFormData((prevData) =>
-        prevData.map((field) => ({
-          ...field,
-          error: validationErrors[field.name] || '',
-        }))
-      );
       return;
     }
 

@@ -4,6 +4,8 @@
 import mongoDB from '@/lib/mongodb';
 // i18n
 import { getTranslations } from 'next-intl/server';
+// Schemas
+import useContactSchema from '@/lib/schemas/contact';
 
 export type FormField = {
   name: string;
@@ -22,53 +24,12 @@ const db = mongoDB.db("portfolio_database");
 const collection = db.collection("contact_submissions");
 
 /**
- * shared validation function
- * Validates the contact form fields.
- */
-export async function validateContactForm(formData: FormField[]) {
-  const t = await getTranslations('ContactPage.form.validations');
-
-  const validationErrors: ValidationErrors = {};
-  let hasvalidationErrors = false;
-
-  formData.forEach((field) => {
-    // Basic required field validation
-    if (field.required && !field.value.trim()) {
-      hasvalidationErrors = true;
-      validationErrors[field.name] = t(`${field.name}Required`);
-    }
-
-    // Email format validation
-    if (field.name === 'email' && field.value) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(field.value)) {
-        hasvalidationErrors = true;
-        validationErrors[field.name] = t('invalidEmail');
-      }
-    }
-
-    // Max length validation
-    const maxLengths: { [key: string]: number } = {
-      name: 100,
-      email: 100,
-      message: 1000,
-    };
-
-    if (maxLengths[field.name] && field.value.length > maxLengths[field.name]) {
-      hasvalidationErrors = true;
-      validationErrors[field.name] = t(`${field.name}MaxLength`, { max: maxLengths[field.name] });
-    }
-  });
-
-  return { hasvalidationErrors, validationErrors };
-}
-
-/**
  * Submit Contact Form
  * Handles server-side validation and Turnstile verification.
  */
 export async function submitContactForm(formData: FormField[], turnstileToken: string) {
   const t = await getTranslations('ContactPage.form.errors');
+  const ContactSchema = await useContactSchema();
 
   // Only allow expected fields
   const allowedFields = ["name", "email", "message"];
@@ -76,13 +37,27 @@ export async function submitContactForm(formData: FormField[], turnstileToken: s
   // Filter out any unexpected fields
   formData = formData.filter(field => allowedFields.includes(field.name));
 
-  // Server-side validation (security layer)
-  const { hasvalidationErrors, validationErrors } = await validateContactForm(formData);
+  let hasvalidationErrors = false;
+  let validationErrors: ValidationErrors = {};
 
-  if (hasvalidationErrors) {
+  // Validate form data using Zod schema
+  const result = ContactSchema.safeParse({
+    name: formData.find(field => field.name === 'name')?.value || '',
+    email: formData.find(field => field.name === 'email')?.value || '',
+    message: formData.find(field => field.name === 'message')?.value || '',
+    createdAt: new Date(),
+  });
+
+  // Handle validation errors
+  if (!result.success) {
+    result.error.issues.forEach((issue) => {
+      const fieldName = issue.path[0] as string;
+      validationErrors[fieldName] = issue.message;
+    });
+
     return {
       success: false,
-      hasvalidationErrors,
+      hasvalidationErrors: true,
       validationErrors,
       hasResponseError: false,
       responseError: ""
