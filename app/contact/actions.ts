@@ -23,25 +23,16 @@ type ResponseError = string;
 const db = mongoDB.db("portfolio_database");
 const collection = db.collection("contact_submissions");
 
-/**
- * Submit Contact Form
- * Handles server-side validation and Turnstile verification.
- */
-export async function submitContactForm(formData: FormField[], turnstileToken: string) {
-  const t = await getTranslations('ContactPage.form.errors');
+
+export async function formValidation(formData: FormField[]) {
   const ContactSchema = await useContactSchema();
 
-  // Only allow expected fields
-  const allowedFields = ["name", "email", "message"];
-
-  // Filter out any unexpected fields
-  formData = formData.filter(field => allowedFields.includes(field.name));
-
+  // Initialize error tracking
   let hasvalidationErrors = false;
   let validationErrors: ValidationErrors = {};
 
   // Validate form data using Zod schema
-  const result = ContactSchema.safeParse({
+  const contactSchemaResult = ContactSchema.safeParse({
     name: formData.find(field => field.name === 'name')?.value || '',
     email: formData.find(field => field.name === 'email')?.value || '',
     message: formData.find(field => field.name === 'message')?.value || '',
@@ -49,15 +40,44 @@ export async function submitContactForm(formData: FormField[], turnstileToken: s
   });
 
   // Handle validation errors
-  if (!result.success) {
-    result.error.issues.forEach((issue) => {
+  if (!contactSchemaResult.success) {
+    hasvalidationErrors = true;
+    contactSchemaResult.error.issues.forEach((issue) => {
       const fieldName = issue.path[0] as string;
       validationErrors[fieldName] = issue.message;
     });
+  }
 
+  return { hasvalidationErrors, validationErrors };
+}
+
+/**
+ * Submit Contact Form
+ * Handles server-side validation and Turnstile verification.
+ */
+export async function submitContactForm(formData: FormField[], turnstileToken: string) {
+  const t = await getTranslations('ContactPage.form.errors');
+
+  // Only allow expected fields
+  const allowedFields = ["name", "email", "message"];
+
+  // Filter out any unexpected fields
+  formData = formData.filter(field => allowedFields.includes(field.name));
+
+  // Initialize error tracking
+  let hasvalidationErrors = false;
+  let validationErrors: ValidationErrors = {};
+
+  // Validate form data
+  const validationResult = await formValidation(formData);
+  hasvalidationErrors = validationResult.hasvalidationErrors;
+  validationErrors = validationResult.validationErrors;
+
+  // If there are validation errors, return them
+  if (hasvalidationErrors) {
     return {
       success: false,
-      hasvalidationErrors: true,
+      hasvalidationErrors,
       validationErrors,
       hasResponseError: false,
       responseError: ""

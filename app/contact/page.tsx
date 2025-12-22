@@ -11,6 +11,8 @@ import { submitContactForm, type FormField } from '@/app/contact/actions';
 import { motion, AnimatePresence } from 'framer-motion';
 /* i18n */
 import { useTranslations, useLocale } from 'next-intl';
+/* Form Validation */
+import { formValidation } from '@/app/contact/actions';
 
 /**
  * Contact Page Component
@@ -18,7 +20,7 @@ import { useTranslations, useLocale } from 'next-intl';
  */
 export default function ContactPage() {
   const t = useTranslations('ContactPage');
-  const locale = useLocale();
+  const locale = useLocale(); // Get current locale for re-rendering on language change
 
   // Form Turnstile
   const [turnstileToken, setTurnstileToken] = useState<string>('');
@@ -34,13 +36,13 @@ export default function ContactPage() {
     { name: 'message', value: '', error: '', placeholder: t('form.message'), type: 'textarea', required: true },
   ]);
 
-  // Update placeholders when language changes
+  // Update placeholders and errors when language changes
   useEffect(() => {
     setFormData((prev) =>
       prev.map((field) => ({
         ...field,
-        placeholder: t(`form.${field.name}` as any),
-        error: '', // Clear errors on language change
+        placeholder: t(`form.${field.name}`),
+        error: field.error ? t(`form.validations.${field.name}Required`) : '',
       }))
     );
   }, [locale, t]);
@@ -55,6 +57,19 @@ export default function ContactPage() {
       return;
     }
 
+    // Clinet Side Validation to provide instant feedback before server submission
+    const validationResult = await formValidation(formData);
+    if (validationResult.hasvalidationErrors) {
+      setFormData((prevData) =>
+        prevData.map((field) => ({
+          ...field,
+          error: validationResult.validationErrors[field.name] || '',
+        }))
+      );
+      return;
+    }
+
+    // Set loading state
     setSubmitLoading(true);
 
     // Server-side submission
