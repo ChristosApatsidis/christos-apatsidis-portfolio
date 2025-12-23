@@ -61,13 +61,18 @@ export const metadata: Metadata = {
     title: "Christos Apatsidis Portfolio",
     description: "Christos Apatsidis portfolio",
     siteName: "Christos Apatsidis Portfolio",
-    images: ["./logo.png"]
+    images: [{
+      url: "og-image-home.png",
+      width: 1200,
+      height: 630,
+      alt: "Christos Apatsidis Portfolio"
+    }]
   },
   twitter: {
     card: "summary_large_image",
     title: "Christos Apatsidis Portfolio",
     description: "Christos Apatsidis portfolio",
-    images: ["./logo.png"]
+    images: ["./og-image-home.png"]
   }
 };
 
