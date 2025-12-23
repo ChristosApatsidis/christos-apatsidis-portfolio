@@ -100,7 +100,7 @@ export default async function RootLayout({
             <Navbar />
 
             {/* Main Content */}
-            <main className="flex-1 flex flex-col mt-[88px] container mx-auto max-w-6xl px-4">
+            <main role="main" className="flex-1 flex flex-col mt-[88px] container mx-auto max-w-6xl px-4">
               {children}
             </main>
 
