@@ -66,16 +66,16 @@ export function CookieBanner() {
               <button
                 onClick={acceptCookies}
                 className="
-                  bg-green-500 
-                  dark:bg-green-500 
+                  bg-green-600 
+                  dark:bg-green-600 
                   text-white 
                   px-3 
                   py-1 
                   rounded-lg 
                   font-semibold 
                   shadow 
-                  hover:bg-green-600 
-                  dark:hover:bg-green-600
+                  hover:bg-green-700 
+                  dark:hover:bg-green-700
                   transition-colors 
                   text-xs
                   cursor-pointer
