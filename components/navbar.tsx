@@ -74,7 +74,9 @@ export function Navbar({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div
+    <nav
+      role="navigation"
+      aria-label="Main Navigation"
       className={cn(
         `fixed top-3 inset-x-0 z-50 max-w-6xl mx-auto px-4 ${isModalOpen ? "pointer-events-none blur-sm" : ""}`,
         className
@@ -217,6 +219,7 @@ export function Navbar({ className }: { className?: string }) {
               className="md:hidden overflow-hidden w-full"
             >
               <div className="flex flex-col items-center align-center py-2 p-4 space-y-2">
+                {/* Home Menu Item */}
                 <MenuItem
                   closeMobileMenu={() => setMobileMenuOpen(false)}
                   href={menuConfig.home.link}
@@ -227,7 +230,12 @@ export function Navbar({ className }: { className?: string }) {
                 >
                   {menuConfig.home.title}
                 </MenuItem>
-                <div className="w-full h-[0.1rem] bg-black/[0.1] dark:bg-white/[0.2] rounded-xl"></div>
+                {/* Divider */}
+                <div
+                  className="w-full h-[0.1rem] bg-black/[0.1] dark:bg-white/[0.2] rounded-xl"
+                  aria-hidden="true"
+                />
+                {/* About Menu Item */}
                 <MenuItem
                   closeMobileMenu={() => setMobileMenuOpen(false)}
                   href={menuConfig.about.link}
@@ -238,7 +246,12 @@ export function Navbar({ className }: { className?: string }) {
                 >
                   {menuConfig.about.title}
                 </MenuItem>
-                <div className="w-full h-[0.1rem] bg-black/[0.1] dark:bg-white/[0.2] rounded-xl"></div>
+                {/* Divider */}
+                <div
+                  className="w-full h-[0.1rem] bg-black/[0.1] dark:bg-white/[0.2] rounded-xl"
+                  aria-hidden="true"
+                />
+                {/* Contact Menu Item */}
                 <MenuItem
                   closeMobileMenu={() => setMobileMenuOpen(false)}
                   href={menuConfig.contact.link}
@@ -254,7 +267,7 @@ export function Navbar({ className }: { className?: string }) {
           )}
         </AnimatePresence>
       </motion.div>
-    </div>
+    </nav>
   );
 }
 

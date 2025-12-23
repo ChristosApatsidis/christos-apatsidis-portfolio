@@ -29,7 +29,11 @@ export function Footer({ className }: {
   }, []);
 
   return (
-    <footer className={`mt-3 mb-3 ${cn(className)}`}>
+    <footer
+      role="contentinfo"
+      aria-label="Footer"
+      className={`mt-3 mb-3 ${cn(className)}`}
+    >
       <div className="relative rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/30 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6">
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -98,7 +102,10 @@ export function Footer({ className }: {
 
         </div>
 
-        <div className="w-full h-[0.1rem] bg-black/[0.1] dark:bg-white/[0.2] rounded-xl"></div>
+        <div
+          className="w-full h-[0.1rem] bg-black/[0.1] dark:bg-white/[0.2] rounded-xl"
+          aria-hidden="true"
+        />
 
         {/* footer */}
         <div className="flex justify-between">
