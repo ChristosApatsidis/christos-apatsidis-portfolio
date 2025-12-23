@@ -97,17 +97,16 @@ export default async function RootLayout({
               <Spotlight />
             </div>
             {/* Navigation Bar */}
-            <nav>
-              <Navbar />
-            </nav>
+            <Navbar />
+
             {/* Main Content */}
             <main className="flex-1 flex flex-col mt-[88px] container mx-auto max-w-6xl px-4">
               {children}
             </main>
+
             {/* Footer */}
-            <footer>
-              <Footer className="container mx-auto max-w-6xl px-4" />
-            </footer>
+            <Footer className="container mx-auto max-w-6xl px-4" />
+
             {/* Cookie Banner */}
             <CookieBanner />
           </ThemeProvider>
