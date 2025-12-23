@@ -8,6 +8,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Spotlight } from "@/components/ui/spotlight-new";
 // i18n
 import { NextIntlClientProvider } from 'next-intl';
+import { getLocale } from 'next-intl/server';
 // Vercel Speed Insights and Analytics
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/next"
@@ -70,13 +71,15 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
-    <html suppressHydrationWarning translate="no" className="notranslate">
+    <html suppressHydrationWarning lang={locale} translate="no" className="notranslate">
       <head>
         <meta name="google" content="notranslate" />
       </head>
