@@ -126,13 +126,22 @@ export function Navbar({ className }: { className?: string }) {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4 absolute left-1/2 -translate-x-1/2">
-            <MenuItem href={menuConfig.home.link}>
+            <MenuItem
+              href={menuConfig.home.link}
+              ariaLabel={menuConfig.home.title}
+            >
               {menuConfig.home.title}
             </MenuItem>
-            <MenuItem href={menuConfig.about.link}>
+            <MenuItem
+              href={menuConfig.about.link}
+              ariaLabel={menuConfig.about.title}
+            >
               {menuConfig.about.title}
             </MenuItem>
-            <MenuItem href={menuConfig.contact.link}>
+            <MenuItem
+              href={menuConfig.contact.link}
+              ariaLabel={menuConfig.contact.title}
+            >
               {menuConfig.contact.title}
             </MenuItem>
           </div>
@@ -211,6 +220,7 @@ export function Navbar({ className }: { className?: string }) {
                 <MenuItem
                   closeMobileMenu={() => setMobileMenuOpen(false)}
                   href={menuConfig.home.link}
+                  ariaLabel={menuConfig.home.title}
                   mobile
                   pendingMobileNav={pendingMobileNav}
                   setPendingMobileNav={setPendingMobileNav}
@@ -221,6 +231,7 @@ export function Navbar({ className }: { className?: string }) {
                 <MenuItem
                   closeMobileMenu={() => setMobileMenuOpen(false)}
                   href={menuConfig.about.link}
+                  ariaLabel={menuConfig.about.title}
                   mobile
                   pendingMobileNav={pendingMobileNav}
                   setPendingMobileNav={setPendingMobileNav}
@@ -231,6 +242,7 @@ export function Navbar({ className }: { className?: string }) {
                 <MenuItem
                   closeMobileMenu={() => setMobileMenuOpen(false)}
                   href={menuConfig.contact.link}
+                  ariaLabel={menuConfig.contact.title}
                   mobile
                   pendingMobileNav={pendingMobileNav}
                   setPendingMobileNav={setPendingMobileNav}
@@ -246,8 +258,9 @@ export function Navbar({ className }: { className?: string }) {
   );
 }
 
-function MenuItem({ href, children, closeMobileMenu, mobile, pendingMobileNav, setPendingMobileNav }: {
+function MenuItem({ href, ariaLabel, children, closeMobileMenu, mobile, pendingMobileNav, setPendingMobileNav }: {
   href: string;
+  ariaLabel?: string | "";
   children: React.ReactNode;
   closeMobileMenu?: () => void;
   mobile?: boolean;
@@ -294,6 +307,7 @@ function MenuItem({ href, children, closeMobileMenu, mobile, pendingMobileNav, s
       href={href}
       onClick={() => handleMobileNavigation(href)}
       prefetch={true}
+      aria-label={ariaLabel}
     >
       <div
         className={cn("relative", mobile && "p-2")}

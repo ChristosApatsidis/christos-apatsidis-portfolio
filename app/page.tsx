@@ -223,6 +223,7 @@ function ProfileSection({ className }: {
                 href="https://github.com/ChristosApatsidis"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub Profile"
                 className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -233,6 +234,7 @@ function ProfileSection({ className }: {
                 href="https://www.linkedin.com/in/christos-apatsidis"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn Profile"
                 className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -241,6 +243,7 @@ function ProfileSection({ className }: {
               </a>
               <a
                 href="mailto:christos.apatsidis@icloud.com"
+                aria-label="Send Email"
                 className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
