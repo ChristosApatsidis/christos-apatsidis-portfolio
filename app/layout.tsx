@@ -15,6 +15,8 @@ import { Analytics } from "@vercel/analytics/next"
 import { CookieBanner } from "@/components/cookie-banner";
 // Styles
 import "./globals.css";
+// Vercel Toolbar
+import { VercelToolbar } from '@vercel/toolbar/next';
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footter";
@@ -110,6 +112,7 @@ export default function RootLayout({
         {/* Vercel Speed Insights & Analytics */}
         <SpeedInsights />
         <Analytics />
+        {process.env.NODE_ENV === 'development' && <VercelToolbar />}
       </body>
     </html>
   );

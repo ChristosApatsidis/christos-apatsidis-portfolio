@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from 'next-intl/plugin';
+const createWithVercelToolbar = require('@vercel/toolbar/plugins/next');
 
 const withNextIntl = createNextIntlPlugin({
   experimental: {
@@ -10,6 +11,8 @@ const withNextIntl = createNextIntlPlugin({
     }
   }
 });
+
+const withVercelToolbar = createWithVercelToolbar();
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -40,4 +43,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default withVercelToolbar(withNextIntl(nextConfig));
