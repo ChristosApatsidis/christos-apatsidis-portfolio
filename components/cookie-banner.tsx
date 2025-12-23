@@ -66,22 +66,24 @@ export function CookieBanner() {
               <button
                 onClick={acceptCookies}
                 className="
-                  bg-green-600 
-                  dark:bg-green-600 
+                  bg-green-700 
+                  dark:bg-green-700 
                   text-white 
                   px-3 
                   py-1 
                   rounded-lg 
                   font-semibold 
                   shadow 
-                  hover:bg-green-700 
-                  dark:hover:bg-green-700
+                  hover:bg-green-800 
+                  dark:hover:bg-green-800
                   transition-colors 
                   text-xs
                   cursor-pointer
                   mt-2 
                   md:mt-0 
-                  self-end"
+                  self-end
+                "
+                aria-label="Accept Cookies"
               >
                 Accept
               </button>
