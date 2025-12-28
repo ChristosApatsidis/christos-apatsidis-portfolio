@@ -11,7 +11,9 @@ import { ImageModal } from "@/components/ui/image-modal";
 import { SectionCard, SectionCardHeader } from "@/components/ui/sectionCard";
 /* Theme */
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
+/* Animation library */
+import { motion, Variants } from "framer-motion";
+/* Utility */
 import { cn } from "@/lib/utils";
 /* Icons */
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs } from "react-icons/fa";
@@ -281,7 +283,7 @@ function SkillsSection({ className }: {
   const [isAnimated, setIsAnimated] = useState<boolean>(false);
 
   // Animation Variants
-  const containerVariants = {
+  const container: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -292,7 +294,7 @@ function SkillsSection({ className }: {
     },
   };
 
-  const itemVariants = {
+  const item: Variants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
     visible: {
       opacity: 1,
@@ -375,7 +377,7 @@ function SkillsSection({ className }: {
           animate={isAnimated ? "visible" : "hidden"}
           onViewportEnter={() => setIsAnimated(true)}
           viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
+          variants={container}
         >
           <SectionCardHeader>{t('title')}</SectionCardHeader>
           {/* Skills Grid */}
@@ -386,13 +388,13 @@ function SkillsSection({ className }: {
               </h3>
               <motion.div
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
-                variants={containerVariants}
+                variants={container}
               >
                 {skillCategory.items.map((skill: SkillItem, idx) => (
                   <motion.div
                     key={idx}
                     className={`flex items-center gap-2 px-4 py-2 bg-neutral-200/50 dark:bg-zinc-900/20 rounded-md text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700`}
-                    variants={itemVariants}
+                    variants={item}
                     whileHover={{
                       scale: 1.02,
                       boxShadow: theme === 'dark'
