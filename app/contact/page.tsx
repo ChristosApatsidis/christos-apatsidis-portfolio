@@ -1,12 +1,15 @@
 "use client";
 
+/* Types */
+import type { FormField } from '@/types/forms';
+
 import React, { useState, useEffect, useRef } from 'react';
 /* UI Components */
 import { SectionCard, SectionCardHeader } from '@/components/ui/sectionCard';
 import { Input, TextArea, Button, Turnstile } from '@/components/ui/forms';
 import { TurnstileInstance } from '@marsidev/react-turnstile';
 /* Actions */
-import { submitContactForm, type FormField } from '@/app/contact/actions';
+import { submitContactForm } from '@/app/contact/actions';
 /* Animation */
 import { motion, AnimatePresence } from 'framer-motion';
 /* i18n */

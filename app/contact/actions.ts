@@ -1,20 +1,14 @@
 "use server";
 
+/* Types */
+import type { FormField } from '@/types/forms';
+
 // Database
 import mongoDB from '@/lib/mongodb';
 // i18n
 import { getTranslations } from 'next-intl/server';
 // Schemas
 import useContactSchema from '@/lib/schemas/contact';
-
-export type FormField = {
-  name: string;
-  value: string;
-  type: string;
-  placeholder: string;
-  required?: boolean;
-  error: string;
-};
 
 type ValidationErrors = { [key: string]: string };
 type ResponseError = string;

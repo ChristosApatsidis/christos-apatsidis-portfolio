@@ -1,5 +1,8 @@
 "use client";
 
+/* Types */
+import type { SkillCategory, SkillItem } from "@/types/skills";
+
 import React, { useEffect, useState } from "react";
 /* Next.js Components */
 import Image from "next/image";
@@ -301,7 +304,7 @@ function SkillsSection({ className }: {
     },
   };
 
-  const skills = [
+  const skills: SkillCategory[] = [
     {
       category: t('frontend'),
       items: [
@@ -376,7 +379,7 @@ function SkillsSection({ className }: {
         >
           <SectionCardHeader>{t('title')}</SectionCardHeader>
           {/* Skills Grid */}
-          {skills.map((skillCategory, index) => (
+          {skills.map((skillCategory: SkillCategory, index) => (
             <div key={index} className="mb-6">
               <h3 className="text-xl font-semibold text-black dark:text-white mb-2">
                 {skillCategory.category}
@@ -385,7 +388,7 @@ function SkillsSection({ className }: {
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
                 variants={containerVariants}
               >
-                {skillCategory.items.map((skill, idx) => (
+                {skillCategory.items.map((skill: SkillItem, idx) => (
                   <motion.div
                     key={idx}
                     className={`flex items-center gap-2 px-4 py-2 bg-neutral-200/50 dark:bg-zinc-900/20 rounded-md text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700`}
