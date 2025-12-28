@@ -1,23 +1,17 @@
 "use client";
 
-import { memo, useState, useEffect, Suspense } from 'react';
-import { forwardRef } from 'react';
-import { Turnstile as TurnstileWidget, TurnstileInstance } from '@marsidev/react-turnstile';
-import { useLocale } from 'next-intl';
+/* Types */
+import type { TurnstileProps } from '@marsidev/react-turnstile';
 
-interface TurnstileProps {
-  onSuccess: (token: string) => void;
-  onError?: () => void;
-  onExpire?: () => void;
-  options?: {
-    theme?: 'light' | 'dark' | 'auto';
-    size?: 'normal' | 'compact' | 'flexible';
-    refreshExpired?: 'auto' | 'manual';
-  }
-}
+import { memo, useState, useEffect, forwardRef } from 'react';
+/* Turnstile CAPTCHA React wrapper */
+import { Turnstile as TurnstileWidget, TurnstileInstance } from '@marsidev/react-turnstile';
+/* i18n */
+import { useLocale } from 'next-intl';
 
 /**
  * Turnstile CAPTCHA component wrapper.
+ * Renders the Turnstile widget with loading state and error handling.
  */
 export const Turnstile = memo(forwardRef<TurnstileInstance, TurnstileProps>(
   ({ onSuccess, onError, onExpire, options = {} }, ref) => {

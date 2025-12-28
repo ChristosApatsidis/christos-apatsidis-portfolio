@@ -1,15 +1,13 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+"use client";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  type?: "button" | "submit" | "reset";
-  loading?: boolean;
-  loadingMessage?: string;
-  disabled?: boolean;
-  className?: string;
-  children: React.ReactNode;
-}
+/* Types */
+import type { ButtonProps } from "@/types/forms";
+
+import React from "react";
+/* Animation library */
+import { motion } from "framer-motion";
+/* Utility */
+import { cn } from "@/lib/utils";
 
 export const Button: React.FC<ButtonProps> = ({
   type = "button",

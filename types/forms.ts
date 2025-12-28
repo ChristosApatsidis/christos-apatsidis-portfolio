@@ -1,3 +1,6 @@
+import { ReactNode } from "react";
+import type { InputHTMLAttributes, TextareaHTMLAttributes, ButtonHTMLAttributes, ChangeEvent } from "react"
+
 export interface FormField {
   name: string;
   value: string;
@@ -6,3 +9,40 @@ export interface FormField {
   required?: boolean;
   error: string;
 };
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  label?: string;
+  className?: string;
+  error?: string;
+}
+
+export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  value: string;
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  label?: string;
+  resize?: string;
+  className?: string;
+  error?: string;
+}
+
+export interface TurnstileProps {
+  onSuccess: (token: string) => void;
+  onError?: () => void;
+  onExpire?: () => void;
+  options?: {
+    theme?: 'light' | 'dark' | 'auto';
+    size?: 'normal' | 'compact' | 'flexible';
+    refreshExpired?: 'auto' | 'manual';
+  }
+}
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  type?: "button" | "submit" | "reset";
+  loading?: boolean;
+  loadingMessage?: string;
+  disabled?: boolean;
+  className?: string;
+  children: ReactNode;
+}

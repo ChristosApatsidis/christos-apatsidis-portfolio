@@ -1,23 +1,13 @@
+"use client";
+
+/* Types */
+import type { InputProps, TextAreaProps } from "@/types/forms";
+
 import React from 'react';
+/* Animation library */
 import { motion, AnimatePresence } from 'framer-motion';
+/* Utility */
 import { cn } from "@/lib/utils";
-
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  label?: string;
-  className?: string;
-  error?: string;
-}
-
-interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  label?: string;
-  resize?: string;
-  className?: string;
-  error?: string;
-}
 
 /**
  * Reusable form input component with validation error display and smooth animations.
