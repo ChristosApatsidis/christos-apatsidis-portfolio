@@ -5,7 +5,7 @@ import type { FormField } from '@/types/forms';
 
 import React, { useState, useEffect, useRef } from 'react';
 /* UI Components */
-import { SectionCard, SectionCardHeader } from '@/components/ui/sectionCard';
+import { SectionCard, SectionCardHeader } from '@/components/ui/section-card';
 import { Input, TextArea, Button, Turnstile } from '@/components/ui/forms';
 import { TurnstileInstance } from '@marsidev/react-turnstile';
 /* Actions */

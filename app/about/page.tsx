@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Spotlight } from "@/components/ui/spotlight-new";
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { SectionCard, SectionCardHeader } from '@/components/ui/sectionCard';
+import { SectionCard, SectionCardHeader } from '@/components/ui/section-card';
 
 export default function AboutPage() {
 

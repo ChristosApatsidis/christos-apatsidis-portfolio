@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 /* UI Components */
 import { ImageModal } from "@/components/ui/image-modal";
-import { SectionCard, SectionCardHeader } from "@/components/ui/sectionCard";
+import { SectionCard, SectionCardHeader } from "@/components/ui/section-card";
 /* Theme */
 import { useTheme } from "next-themes";
 /* Animation library */

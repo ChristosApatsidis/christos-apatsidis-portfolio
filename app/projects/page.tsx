@@ -7,7 +7,7 @@ import React from 'react';
 // Animation library
 import { motion, Variants } from 'framer-motion';
 // UI Components
-import { SectionCard } from '@/components/ui/sectionCard';
+import { SectionCard } from '@/components/ui/section-card';
 import { ProjectsGrid, ProjectsGridItem } from '@/components/ui/projects-grid';
 // Icons
 import {
