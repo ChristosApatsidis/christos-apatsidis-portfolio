@@ -35,3 +35,14 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
   children: ReactNode;
 }
+
+export interface TurnstileProps {
+  siteKey?: string;
+  onSuccess?: (token: string) => void;
+  onError?: () => void;
+  onExpire?: () => void;
+  options?: {
+    theme?: 'light' | 'dark' | 'auto';
+    size?: 'normal' | 'compact' | 'flexible';
+  };
+}

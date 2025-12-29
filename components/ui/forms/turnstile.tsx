@@ -1,21 +1,13 @@
 "use client";
 
+/* Types */
+import type { TurnstileProps } from '@/types/forms';
+
 import { memo, useState, useEffect, forwardRef } from 'react';
 /* Turnstile CAPTCHA React wrapper */
 import { Turnstile as TurnstileWidget, TurnstileInstance } from '@marsidev/react-turnstile';
 /* i18n */
 import { useLocale } from 'next-intl';
-
-interface TurnstileProps {
-  siteKey?: string; // Make it optional
-  onSuccess?: (token: string) => void;
-  onError?: () => void;
-  onExpire?: () => void;
-  options?: {
-    theme?: 'light' | 'dark' | 'auto';
-    size?: 'normal' | 'compact' | 'flexible';
-  };
-}
 
 /**
  * Turnstile CAPTCHA component wrapper.
