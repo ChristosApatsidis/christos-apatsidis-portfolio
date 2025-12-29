@@ -27,17 +27,6 @@ export interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElemen
   error?: string;
 }
 
-export interface TurnstileProps {
-  onSuccess: (token: string) => void;
-  onError?: () => void;
-  onExpire?: () => void;
-  options?: {
-    theme?: 'light' | 'dark' | 'auto';
-    size?: 'normal' | 'compact' | 'flexible';
-    refreshExpired?: 'auto' | 'manual';
-  }
-}
-
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   type?: "button" | "submit" | "reset";
   loading?: boolean;
