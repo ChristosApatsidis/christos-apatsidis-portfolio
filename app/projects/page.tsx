@@ -50,9 +50,7 @@ export default function ProjectsPage() {
         <SiMongodb key="mongo" className="h-4 w-4" />,
         <SiTailwindcss key="tailwind" className="h-4 w-4" />,
       ],
-      urls: {
-
-      },
+      urls: {},
       title: 'Appointments Manager',
       description: '',
     },
@@ -189,39 +187,40 @@ export default function ProjectsPage() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const item: Variants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    },
   };
 
   return (
     <SectionCard transition={{ duration: 0.5, ease: "easeOut" }}>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        variants={container}
+        initial="hidden"
+        animate="show"
       >
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-        >
-          <ProjectsGrid className='gap-4'>
-            {projects.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={item}
-              >
-                <ProjectsGridItem project={project} />
-              </motion.div>
-            ))}
-          </ProjectsGrid>
-        </motion.div>
+        <ProjectsGrid className='gap-4'>
+          {projects.map((project) => (
+            <motion.div
+              key={project.id}
+              variants={item}
+            >
+              <ProjectsGridItem project={project} />
+            </motion.div>
+          ))}
+        </ProjectsGrid>
       </motion.div>
     </SectionCard>
   );
