@@ -12,7 +12,7 @@ export function SectionCard({ children, className, transition }: {
   if (!transition) {
     return (
       <div className={cn(
-        "h-full w-full flex-1 rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/30 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6",
+        "h-full w-full flex-1 rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/50 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6",
         className
       )}
       >
@@ -23,11 +23,10 @@ export function SectionCard({ children, className, transition }: {
 
   return (
     <motion.div
-
       animate={{ opacity: 1, scale: 1 }}
       transition={transition}
       className={cn(
-        "h-full w-full flex-1 rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/30 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6",
+        "h-full w-full flex-1 rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/50 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6",
         className
       )}
     >

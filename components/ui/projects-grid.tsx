@@ -68,7 +68,7 @@ export const ProjectsGridItem = ({
   return (
     <div
       className={cn(
-        "relative shadow-input row-span-1 flex h-full flex-col rounded-xl border border-black/[0.1] dark:border-white/[0.2] backdrop-blur-md p-4 bg-neutral-200/50 dark:bg-zinc-900/20 dark:backdrop-blur-lg dark:shadow-none cursor-pointer hover:scale-[1.01] transition-transform",
+        "relative rounded-xl row-span-1 flex h-full flex-col p-4 border border-black/[0.1] dark:border-white/[0.2] bg-white/20 dark:bg-black/20 backdrop-blur-lg shadow-input cursor-pointer hover:scale-[1.01] transition-transform",
         className,
       )}
       onClick={() => router.push(url)}
