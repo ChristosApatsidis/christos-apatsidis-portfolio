@@ -4,8 +4,6 @@ import React from "react";
 import { ThemeProvider } from "@/components/theme-provider"
 // Fonts
 import { Geist, Geist_Mono } from "next/font/google";
-// Spotlight background effect
-import { Spotlight } from "@/components/ui/spotlight-new";
 // i18n
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale } from 'next-intl/server';
@@ -18,9 +16,10 @@ import { CookieBanner } from "@/components/cookie-banner";
 import "./globals.css";
 // Vercel Toolbar
 import { VercelToolbar } from '@vercel/toolbar/next';
-
+// Layout Components
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footter";
+import { Background } from "@/components/ui/background";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -97,9 +96,9 @@ export default async function RootLayout({
             defaultTheme="system"
             enableSystem
           >
-            {/* Background Spotlight Effect */}
+            {/* Background */}
             <div className="fixed inset-0 h-full w-full z-0">
-              <Spotlight />
+              <Background />
             </div>
             {/* Navigation Bar */}
             <Navbar />

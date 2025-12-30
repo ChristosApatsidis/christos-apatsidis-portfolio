@@ -1,7 +1,7 @@
 "use client";
 
 /* Types */
-import type { TurnstileProps } from '@marsidev/react-turnstile';
+import type { TurnstileProps } from '@/types/forms';
 
 import { memo, useState, useEffect, forwardRef } from 'react';
 /* Turnstile CAPTCHA React wrapper */

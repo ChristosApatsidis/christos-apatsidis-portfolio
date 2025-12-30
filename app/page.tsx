@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 /* UI Components */
 import { ImageModal } from "@/components/ui/image-modal";
-import { SectionCard, SectionCardHeader } from "@/components/ui/sectionCard";
+import { SectionCard, SectionCardHeader } from "@/components/ui/section-card";
 /* Theme */
 import { useTheme } from "next-themes";
 /* Animation library */
@@ -393,7 +393,7 @@ function SkillsSection({ className }: {
                 {skillCategory.items.map((skill: SkillItem, idx) => (
                   <motion.div
                     key={idx}
-                    className={`flex items-center gap-2 px-4 py-2 bg-neutral-200/50 dark:bg-zinc-900/20 rounded-md text-gray-800 dark:text-gray-200 font-medium border border-gray-300 dark:border-gray-700`}
+                    className={`flex items-center gap-2 px-4 py-2 border border-black/[0.1] dark:border-white/[0.2] bg-white/30 dark:bg-black/10 backdrop-blur-lg text-gray-800 dark:text-gray-200 font-medium rounded-md shadow-input cursor-pointer`}
                     variants={item}
                     whileHover={{
                       scale: 1.02,

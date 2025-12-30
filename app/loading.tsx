@@ -1,4 +1,4 @@
-import { SectionCard } from "@/components/ui/sectionCard";
+import { SectionCard } from "@/components/ui/section-card";
 
 export default function Loading() {
   return (
