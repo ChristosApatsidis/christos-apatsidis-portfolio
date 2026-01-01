@@ -1,7 +1,16 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import type { ProjectsGridProps, ProjectsGridItemProps } from '@/types/projects';
+
+// Utils
 import { cn } from "@/lib/utils";
+// Glowing Effect Component
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 // Next.js
 import { useRouter } from 'next/navigation';
+// Animation
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * ProjectsGrid Component
@@ -9,10 +18,7 @@ import { useRouter } from 'next/navigation';
 export const ProjectsGrid = ({
   className,
   children,
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) => {
+}: ProjectsGridProps) => {
   return (
     <div
       className={cn(
@@ -31,76 +37,82 @@ export const ProjectsGrid = ({
 export const ProjectsGridItem = ({
   className,
   project
-}: {
-  className?: string;
-  project: {
-    title: string;
-    description: string;
-    header: {
-      image?: {
-        src: string;
-        width: number;
-        height: number;
-        alt: string;
-      };
-      gradient?: string;
-    };
-    icons?: React.ReactNode;
-    urls?: {
-      live?: {
-        href: string;
-        label: string;
-        icon: React.ReactNode;
-      }
-      github?: {
-        href: string;
-        label: string;
-        icon: React.ReactNode;
-      },
-    };
-    url: string;
-  };
-}) => {
+}: ProjectsGridItemProps) => {
   const router = useRouter();
 
+  // Destructure project properties
   const { title, description, header, icons, urls, url } = project;
+  const { bannerImages } = header || {};
+  const images = bannerImages || [];
+
+  // Slider state
+  const [currentSliderImage, setCurrentSliderImage] = useState<number>(0);
+
+  // Auto-advance images every 4 seconds
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentSliderImage((prev) => (prev + 1) % images.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  // Css glassmorphism styles
+  const glass = `bg-white/50 dark:bg-black/20 bg-clip-padding backdrop-filter`;
+  const border = `border border-black/[0.1] dark:border-white/[0.2]`;
 
   return (
     <div
       className={cn(
-        "relative rounded-xl row-span-1 flex h-full flex-col p-4 border border-black/[0.1] dark:border-white/[0.2] bg-white/20 dark:bg-black/20 backdrop-blur-lg shadow-input cursor-pointer hover:scale-[1.01] transition-transform",
+        "relative rounded-xl row-span-1 flex h-full flex-col p-4 cursor-pointer hover:scale-[1.01] transition-transform",
         className,
+        glass,
+        border
       )}
       onClick={() => router.push(url)}
     >
-      {/* Glowing Effect */}
+
       <GlowingEffect
         spread={40}
         glow={true}
-        disabled={false}
+        disabled={typeof window !== "undefined" && window.innerWidth < 768}
         proximity={64}
         inactiveZone={0.01}
-        borderWidth={2}
+        borderWidth={1}
       />
 
       <div>
         {/* Header Section */}
-        <div className="space-y-2">
-          {/* Image and Gradient Header */}
-          {header?.gradient || header?.image ? (
-            <div className={`rounded-lg p-[0.1rem] flex justify-center items-center bg-gradient-to-br ${header?.gradient} min-h-[10rem] w-full`}>
-              {header?.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={header.image.src}
-                  width={header.image.width}
-                  height={header.image.height}
-                  alt={header.image.alt}
-                  className="object-contain rounded-lg"
-                />
-              ) : null}
+        <div className="space-y-1">
+          {header?.gradient || images.length > 0 ? (
+            <div className={`rounded-lg p-[0.1rem] flex justify-center items-center bg-gradient-to-br ${header?.gradient} min-h-[10rem] w-full relative`}>
+              {images.length > 0 && (
+                <div className="w-full flex flex-col items-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={images[currentSliderImage].src}
+                    width={images[currentSliderImage].width}
+                    height={images[currentSliderImage].height}
+                    alt={images[currentSliderImage].alt}
+                    className="object-contain rounded-lg max-h-48 w-full"
+                  />
+
+                  {/* Dots */}
+                  {images.length > 1 && (
+                    <div className="absolute bottom-2 right-4 flex gap-1">
+                      {images.map((_, idx) => (
+                        <span
+                          key={idx}
+                          className={`inline-block w-2 h-2 rounded-full ${idx === currentSliderImage ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-600'}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           ) : null}
+
           {/* Title */}
           <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200">
             {title}

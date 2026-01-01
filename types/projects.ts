@@ -20,13 +20,25 @@ export interface Project {
   };
   header: {
     gradient: string;
-    image?: {
-      src: string;
-      width: number;
-      height: number;
-      alt: string;
-    };
+    bannerImages?: BannerImage[];
   };
   glowGradient?: string;
   className?: string;
+}
+
+type BannerImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
+export interface ProjectsGridProps {
+  className?: string;
+  children?: ReactNode;
+}
+
+export interface ProjectsGridItemProps {
+  className?: string;
+  project: Project;
 }
