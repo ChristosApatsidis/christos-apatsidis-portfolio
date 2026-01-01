@@ -28,13 +28,23 @@ export function Footer({ className }: {
     return () => clearInterval(timer);
   }, []);
 
+  const glass = `bg-white/50 dark:bg-black/30 bg-clip-padding backdrop-filter backdrop-blur-lg`;
+  const border = `border border-black/[0.1] dark:border-white/[0.2]`;
+
   return (
     <footer
       role="contentinfo"
       aria-label="Footer"
-      className={`mt-3 mb-3 ${cn(className)}`}
+      className={cn(
+        className,
+        'mt-3 mb-3'
+      )}
     >
-      <div className="relative rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/30 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6">
+      <div className={cn(
+        `relative rounded-xl shadow-lg p-6`,
+        glass,
+        border
+      )}>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           {/* Name and Title */}

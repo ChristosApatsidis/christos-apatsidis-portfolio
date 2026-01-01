@@ -77,6 +77,10 @@ function ProfileSection({ className }: {
     };
   }, [isModalOpen]);
 
+  // Css glassmorphism styles
+  const glass = `bg-white/50 dark:bg-black/30 bg-clip-padding backdrop-filter backdrop-blur-lg`;
+  const border = `border border-black/[0.1] dark:border-white/[0.2]`;
+
   return (
     <React.Fragment>
       <SectionCard
@@ -103,20 +107,28 @@ function ProfileSection({ className }: {
             >
               {/* Mobile Image */}
               <Image
-                src="/christos1.png"
+                src="/christos-profile.png"
                 alt="Christos Apatsidis"
-                width={80}
-                height={80}
-                className="w-20 h-20 md:hidden object-cover rounded-full border-4 border-white/50 dark:border-white/20 shadow-xl cursor-pointer"
+                width={120}
+                height={120}
+                className={cn(
+                  "md:hidden w-20 h-20 object-cover rounded-full shadow-xl cursor-pointer",
+                  glass,
+                  border
+                )}
                 priority
               />
               {/* Desktop Image */}
               <Image
-                src="/christos1.png"
+                src="/christos-profile.png"
                 alt="Christos Apatsidis"
                 width={160}
                 height={160}
-                className="hidden md:block md:w-40 md:h-40 lg:w-48 lg:h-48 object-cover rounded-full border-4 border-white/50 dark:border-white/20 shadow-xl cursor-pointer"
+                className={cn(
+                  "hidden md:block md:w-40 md:h-40 lg:w-48 lg:h-48 object-cover rounded-full shadow-xl cursor-pointer",
+                  glass,
+                  border
+                )}
                 priority
               />
             </motion.div>
@@ -262,7 +274,7 @@ function ProfileSection({ className }: {
 
       {/* Profile image Modal */}
       <ImageModal
-        image={{ src: "christos1.png", alt: "Christos Apatsidis" }}
+        image={{ src: "christos-profile.png", alt: "Christos Apatsidis" }}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
@@ -342,6 +354,9 @@ function SkillsSection({ className }: {
     }
   ];
 
+  // Css glassmorphism styles
+  const glass = `bg-white/50 dark:bg-black/30 bg-clip-padding backdrop-filter backdrop-blur-lg`;
+  const border = `border border-black/[0.1] dark:border-white/[0.2]`;
 
   return (
     <React.Fragment>
@@ -393,7 +408,11 @@ function SkillsSection({ className }: {
                 {skillCategory.items.map((skill: SkillItem, idx) => (
                   <motion.div
                     key={idx}
-                    className={`flex items-center gap-2 px-4 py-2 border border-black/[0.1] dark:border-white/[0.2] bg-white/30 dark:bg-black/10 backdrop-blur-lg text-gray-800 dark:text-gray-200 font-medium rounded-md shadow-input cursor-pointer`}
+                    className={cn(
+                      `flex items-center gap-2 px-4 py-2 text-gray-800 dark:text-gray-200 font-medium rounded-md shadow-input cursor-pointer`,
+                      glass,
+                      border
+                    )}
                     variants={item}
                     whileHover={{
                       scale: 1.02,
