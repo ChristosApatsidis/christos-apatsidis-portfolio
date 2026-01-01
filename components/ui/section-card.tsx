@@ -8,12 +8,17 @@ export function SectionCard({ children, className, transition }: {
   transition?: any
 }) {
 
+  const glass = `bg-white/50 dark:bg-black/30 bg-clip-padding backdrop-filter backdrop-blur-lg`;
+  const border = `border border-black/[0.1] dark:border-white/[0.2]`;
+
   // If no transition is provided, render a static div
   if (!transition) {
     return (
       <div className={cn(
-        "h-full w-full flex-1 rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/50 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6",
-        className
+        `h-full w-full flex-1 rounded-xl shadow-lg p-6`,
+        className,
+        glass,
+        border
       )}
       >
         {children}
@@ -26,8 +31,10 @@ export function SectionCard({ children, className, transition }: {
       animate={{ opacity: 1, scale: 1 }}
       transition={transition}
       className={cn(
-        "h-full w-full flex-1 rounded-xl border border-black/[0.1] dark:border-white/[0.2] bg-white/50 dark:bg-black/30 backdrop-blur-lg shadow-lg p-6",
-        className
+        `h-full w-full flex-1 rounded-xl shadow-lg p-6`,
+        className,
+        glass,
+        border
       )}
     >
       {children}

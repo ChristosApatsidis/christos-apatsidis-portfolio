@@ -1,4 +1,7 @@
 import React from "react";
+// Image component
+import Image from "next/image";
+// Animation library
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ImageModal({ image, isOpen, onClose }: {
@@ -41,10 +44,10 @@ export function ImageModal({ image, isOpen, onClose }: {
                 {/* Close Button */}
                 <button
                   onClick={() => onClose()}
-                  className="absolute top-4 right-4 z-20 p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors cursor-pointer"
+                  className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/[0.1] dark:bg-black/[0.1] hover:bg-black/[0.2] dark:hover:bg-black/[0.2] transition-colors cursor-pointer"
                 >
                   <svg
-                    className="w-6 h-6 text-gray-700 dark:text-gray-300"
+                    className="w-6 h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -64,10 +67,13 @@ export function ImageModal({ image, isOpen, onClose }: {
                   transition={{ duration: 0.5 }}
                   className="flex-shrink-0"
                 >
-                  <img
-                    src={image.src}
+                  <Image
+                    src={`/${image.src}`}
                     alt={image.alt || ""}
-                    className="w-full md:w-80 md:h-80 object-cover rounded-xl border-4 border-white/50 dark:border-white/20 shadow-2xl"
+                    width={250}
+                    height={250}
+                    className="w-full w-80 h-80 md:w-80 md:h-80 object-cover rounded-xl border-2 border-black/[0.2] dark:border-white/[0.2] shadow-2xl"
+                    priority
                   />
                 </motion.div>
               </div>

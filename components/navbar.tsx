@@ -31,6 +31,7 @@ export function Navbar({ className }: { className?: string }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState<number>(0);
   const [pendingMobileNav, setPendingMobileNav] = useState<string | null>(null);
 
   // Menu configuration object
@@ -66,32 +67,58 @@ export function Navbar({ className }: { className?: string }) {
   // Listen for scroll
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 30);
+      setScrollY(Math.max(0, window.scrollY));
       setMobileMenuOpen(false);
     };
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Css glassmorphism styles
+  const glass = `bg-white/50 dark:bg-black/30 bg-clip-padding backdrop-filter backdrop-blur-lg`;
+  const border = `border border-black/[0.1] dark:border-white/[0.2]`;
+
+  // Calculate padding based on scrollY (clamped between 8 and 32)
+  const minPadding = 8;
+  const maxPadding = 16;
+  const padding = Math.max(
+    minPadding,
+    maxPadding - Math.min(scrollY, maxPadding - minPadding)
+  );
+
+  // Calculate logo size based on scroll
+  const minLogoSize = 30;
+  const maxLogoSize = 32;
+  const logoSize = Math.max(
+    minLogoSize,
+    maxLogoSize - Math.min(scrollY * 0.2, maxLogoSize - minLogoSize)
+  );
+
   return (
     <nav
       role="navigation"
       aria-label="Main Navigation"
       className={cn(
-        `fixed top-3 inset-x-0 z-50 max-w-6xl mx-auto px-4 ${isModalOpen ? "pointer-events-none blur-sm" : ""}`,
+        `fixed top-3 inset-x-0 z-50 max-w-6xl mx-auto px-4`,
+        isModalOpen ? "pointer-events-none blur-sm" : "",
         className
       )}
     >
       <motion.div
         animate={{
-          paddingTop: scrolled ? 10 : 16,
-          paddingBottom: scrolled || mobileMenuOpen ? 10 : 16,
+          paddingTop: padding,
+          paddingBottom: padding,
         }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="relative border rounded-lg border-black/[0.1] dark:border-white/[0.2] bg-white/30 dark:bg-black/30 backdrop-blur-lg shadow-lg flex flex-col px-4"
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className={cn(
+          `relative rounded-lg flex flex-col px-4 will-change-auto`,
+          glass,
+          border
+        )}
         style={{
-          paddingTop: scrolled ? 10 : 16,
-          paddingBottom: scrolled || mobileMenuOpen ? 10 : 16,
+          paddingTop: padding,
+          paddingBottom: padding,
+          willChange: "padding, background, filter",
         }}
       >
         <div className="flex justify-between items-center w-full">
@@ -104,14 +131,14 @@ export function Navbar({ className }: { className?: string }) {
             >
               <motion.div
                 animate={{
-                  width: scrolled ? 30 : 32,
-                  height: scrolled ? 30 : 32,
+                  width: logoSize,
+                  height: logoSize
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="relative"
                 style={{
-                  width: scrolled ? 30 : 32,
-                  height: scrolled ? 30 : 32,
+                  width: logoSize,
+                  height: logoSize
                 }}
               >
                 <Image
