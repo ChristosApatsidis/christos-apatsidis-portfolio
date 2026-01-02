@@ -57,7 +57,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <SectionCard transition={{ duration: 0.5, ease: "easeOut" }}>
+    <SectionCard>
       <motion.div
         variants={container}
         initial="hidden"

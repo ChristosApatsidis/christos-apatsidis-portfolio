@@ -83,10 +83,7 @@ function ProfileSection({ className }: {
 
   return (
     <React.Fragment>
-      <SectionCard
-        className={className}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
+      <SectionCard className={className}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -360,10 +357,7 @@ function SkillsSection({ className }: {
 
   return (
     <React.Fragment>
-      <SectionCard
-        className={className}
-        transition={{ duration: 0.9, ease: "easeOut" }}
-      >
+      <SectionCard className={className}>
         {/* Scroll message with smooth exit animation - Outside SectionCard */}
         <motion.div
           initial={{ opacity: 0, y: 0 }}
