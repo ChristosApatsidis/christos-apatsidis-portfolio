@@ -46,6 +46,11 @@ export function Navbar({ className }: { className?: string }) {
       link: "/about",
       icon: "about",
     },
+    projects: {
+      title: `${t("projects")}`,
+      link: "/projects",
+      icon: "projects",
+    },
     contact: {
       title: `${t("contact")}`,
       link: "/contact",
@@ -168,6 +173,12 @@ export function Navbar({ className }: { className?: string }) {
               {menuConfig.about.title}
             </MenuItem>
             <MenuItem
+              href={menuConfig.projects.link}
+              ariaLabel={menuConfig.projects.title}
+            >
+              {menuConfig.projects.title}
+            </MenuItem>
+            <MenuItem
               href={menuConfig.contact.link}
               ariaLabel={menuConfig.contact.title}
             >
@@ -272,6 +283,22 @@ export function Navbar({ className }: { className?: string }) {
                   setPendingMobileNav={setPendingMobileNav}
                 >
                   {menuConfig.about.title}
+                </MenuItem>
+                {/* Divider */}
+                <div
+                  className="w-full h-[0.1rem] bg-black/[0.1] dark:bg-white/[0.2] rounded-xl"
+                  aria-hidden="true"
+                />
+                {/* Projects Menu Item */}
+                <MenuItem
+                  closeMobileMenu={() => setMobileMenuOpen(false)}
+                  href={menuConfig.projects.link}
+                  ariaLabel={menuConfig.projects.title}
+                  mobile
+                  pendingMobileNav={pendingMobileNav}
+                  setPendingMobileNav={setPendingMobileNav}
+                >
+                  {menuConfig.projects.title}
                 </MenuItem>
                 {/* Divider */}
                 <div
