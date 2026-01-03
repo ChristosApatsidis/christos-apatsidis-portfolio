@@ -16,7 +16,7 @@ import { motion, Variants } from "framer-motion";
 /* Utility */
 import { cn } from "@/lib/utils";
 /* Icons */
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs } from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt, FaApple, FaGooglePlay } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiSocketdotio, SiMongodb, SiRedis, SiExpo } from "react-icons/si";
 /* i18n */
 import { useTranslations } from 'next-intl';
@@ -348,6 +348,14 @@ function SkillsSection({ className }: {
         { name: "React Native", icon: <FaReact className="text-blue-400" size={20} />, boxShadow: "0 0 10px 2px rgba(100,149,237,0.8)", boxShadowLight: "0 0 10px 2px rgba(30,144,255,0.8)" },
         { name: "Expo", icon: <SiExpo className="text-gray-700 dark:text-gray-300" size={20} />, boxShadow: "0 0 10px 2px rgba(255,255,255,0.8)", boxShadowLight: "0 0 10px 2px rgba(82, 80, 80, 0.8)" },
       ],
+    },
+    {
+      category: t('tools'),
+      items: [
+        { name: "Git", icon: <FaGitAlt className="text-orange-600" size={20} />, boxShadow: "0 0 10px 2px rgba(255,140,0,0.8)", boxShadowLight: "0 0 10px 2px rgba(255,140,0,0.8)" },
+        { name: "Apple Connect", icon: <FaApple className="text-gray-900 dark:text-gray-100" size={20} />, boxShadow: "0 0 10px 2px rgba(255,255,255,0.8)", boxShadowLight: "0 0 10px 2px rgba(0,0,0,0.2)" },
+        { name: "Google Console", icon: <FaGooglePlay className="text-green-600" size={20} />, boxShadow: "0 0 10px 2px rgba(34,197,94,0.5)", boxShadowLight: "0 0 10px 2px rgba(34,197,94,0.5)" }
+      ]
     }
   ];
 
@@ -356,42 +364,42 @@ function SkillsSection({ className }: {
   const border = `border border-black/[0.1] dark:border-white/[0.2]`;
 
   return (
-    <React.Fragment>
-      <SectionCard className={className}>
-        {/* Scroll message with smooth exit animation - Outside SectionCard */}
+    <SectionCard className={className}>
+      {/* Scroll message with smooth exit animation - Outside SectionCard */}
+      <motion.div
+        initial={{ opacity: 0, y: 0 }}
+        animate={{
+          opacity: isAnimated ? 0 : 1,
+          y: isAnimated ? -10 : 0,
+          height: isAnimated ? 0 : 'auto',
+        }}
+        transition={{
+          duration: 0.7,
+          ease: "easeOut"
+        }}
+        className="text-center text-gray-600 dark:text-gray-400 overflow-hidden"
+      >
+        <p className="text-lg">{t('scrollMessage')}</p>
         <motion.div
-          initial={{ opacity: 0, y: 0 }}
-          animate={{
-            opacity: isAnimated ? 0 : 1,
-            y: isAnimated ? -10 : 0,
-            height: isAnimated ? 0 : 'auto',
-          }}
-          transition={{
-            duration: 0.7,
-            ease: "easeOut"
-          }}
-          className="text-center text-gray-600 dark:text-gray-400 overflow-hidden"
+          className="mt-2 animate-bounce"
         >
-          <p className="text-lg">{t('scrollMessage')}</p>
-          <motion.div
-            className="mt-2 animate-bounce"
-          >
-            <svg className="w-6 h-6 mx-auto text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </motion.div>
+          <svg className="w-6 h-6 mx-auto text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
         </motion.div>
-        <motion.div
-          initial="hidden"
-          animate={isAnimated ? "visible" : "hidden"}
-          onViewportEnter={() => setIsAnimated(true)}
-          viewport={{ once: true, amount: 0.2 }}
-          variants={container}
-        >
-          <SectionCardHeader>{t('title')}</SectionCardHeader>
-          {/* Skills Grid */}
+      </motion.div>
+      <motion.div
+        initial="hidden"
+        animate={isAnimated ? "visible" : "hidden"}
+        onViewportEnter={() => setIsAnimated(true)}
+        viewport={{ once: true, amount: 0.2 }}
+        variants={container}
+      >
+        <SectionCardHeader>{t('title')}</SectionCardHeader>
+        {/* Skills Grid */}
+        <div className="space-y-4">
           {skills.map((skillCategory: SkillCategory, index) => (
-            <div key={index} className="mb-6">
+            <div key={index}>
               <h3 className="text-xl font-semibold text-black dark:text-white mb-2">
                 {skillCategory.category}
               </h3>
@@ -436,8 +444,8 @@ function SkillsSection({ className }: {
               </motion.div>
             </div>
           ))}
-        </motion.div>
-      </SectionCard>
-    </React.Fragment>
+        </div>
+      </motion.div>
+    </SectionCard>
   );
 }
