@@ -47,6 +47,8 @@ export const ProjectsGridItem = ({
 
   // Slider state
   const [currentSliderImage, setCurrentSliderImage] = useState<number>(0);
+  // Mobile detection
+  const [isMobile, setIsMobile] = useState(false);
 
   // Auto-advance images every 4 seconds
   useEffect(() => {
@@ -56,6 +58,13 @@ export const ProjectsGridItem = ({
     }, 4000);
     return () => clearInterval(interval);
   }, [images.length]);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Css glassmorphism styles
   const glass = `bg-white/50 dark:bg-black/20 bg-clip-padding backdrop-filter`;
@@ -75,7 +84,7 @@ export const ProjectsGridItem = ({
       <GlowingEffect
         spread={40}
         glow={true}
-        disabled={typeof window !== "undefined" && window.innerWidth < 768}
+        disabled={isMobile}
         proximity={64}
         inactiveZone={0.01}
         borderWidth={1}
