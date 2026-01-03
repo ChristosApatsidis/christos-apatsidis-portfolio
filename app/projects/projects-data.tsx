@@ -17,7 +17,9 @@ import {
   SiMongodb,
   SiExpo,
   SiTailwindcss,
-  SiTypescript
+  SiTypescript,
+  SiMui,
+  SiElectron
 } from 'react-icons/si';
 
 const iconMap = {
@@ -28,9 +30,11 @@ const iconMap = {
   react: <FaReact className="h-4 w-4" key={4} />,
   nodejs: <FaNodeJs className="h-4 w-4" key={5} />,
   socketio: <SiSocketdotio className="h-4 w-4" key={6} />,
-  expo: <SiExpo className="h-4 w-4" key={7} />,
-  github: <FaGithub className="h-4 w-4" key={8} />,
-  externallink: <FaExternalLinkAlt className="h-4 w-4" key={9} />,
+  electron: <SiElectron className="h-4 w-4" key={7} />,
+  expo: <SiExpo className="h-4 w-4" key={8} />,
+  mui: <SiMui className="h-4 w-4" key={9} />,
+  github: <FaGithub className="h-4 w-4" key={10} />,
+  externallink: <FaExternalLinkAlt className="h-4 w-4" key={11} />,
 };
 
 /**
@@ -51,10 +55,10 @@ export const projects: Project[] = [
       }],
     },
     icons: [
-      iconMap.nextdotjs,
       iconMap.typescript,
-      iconMap.mongodb,
-      iconMap.tailwindcss
+      iconMap.electron,
+      iconMap.mui,
+      iconMap.mongodb
     ],
     urls: {},
     title: 'Appointments Manager',
