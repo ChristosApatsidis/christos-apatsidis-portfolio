@@ -335,7 +335,14 @@ function MenuItem({ href, ariaLabel, children, closeMobileMenu, mobile, pendingM
   setPendingMobileNav?: (href: string | null) => void;
 }) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+
+  // Determine if the menu item is active based on the current pathname and href
+  const isActive =
+    href === "/"
+      ? pathname === "/"
+      : pathname === href || pathname.startsWith(href + "/");
+
+  // Underline animation duration
   const underlineDuration = 0.3;
 
   /**
