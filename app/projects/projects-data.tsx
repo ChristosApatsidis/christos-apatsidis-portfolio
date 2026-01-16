@@ -55,10 +55,10 @@ export const projects: Project[] = [
       }],
     },
     icons: [
-      iconMap.typescript,
       iconMap.electron,
-      iconMap.mui,
-      iconMap.mongodb
+      iconMap.typescript,
+      iconMap.mongodb,
+      iconMap.mui
     ],
     urls: {},
     title: 'Appointments Manager',
